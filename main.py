@@ -25,4 +25,4 @@ async def on_guild_join(guild):
         await guild.owner.send('Your Server Blacklisted!!')
         await guild.leave()
 
-client.run(os.getenv('TOKEN'))
+client.run('OTMwNzg1OTQ5NzgzMjk4MDY4.Yd679w.Sq_ba2UrICO_G3w5vCrKejvv0ZY')
