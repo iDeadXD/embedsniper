@@ -43,11 +43,11 @@ class Moderator(commands.Cog):
                 thumbnail = 'None' if len(embthumbnail) == 0 else embthumbnail
                 
                 if data is None:
-                    new_data = {'_id': message.guild.id, 'authorid': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}'}
+                    new_data = {'_id': message.guild.id, 'authorid': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}
                     saved.insert_one(new_data)
                     await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nChannel: {message.channel.mention}')
                 else:
-                    saved.update_one({'_id': message.guild.id}, {'$set': {'author_id': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}'}})
+                    saved.update_one({'_id': message.guild.id}, {'$set': {'author_id': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}})
                     await dev.send(f'Embed Data has been Updated!\nTimestamp: {now}\nChannel: {message.channel.mention}')
             except Exception as e:
                 return print(e)
@@ -59,6 +59,7 @@ class Moderator(commands.Cog):
         if data is None:
             return
         
+        author = self.client.get_user(data['author'])
         recreate = discord.Embed(
             title='--- Embed Sniped! ---',
             description=f'**Title**: {data["title"]}',
@@ -71,6 +72,7 @@ class Moderator(commands.Cog):
         recreate.add_field(name='Footer Icon URL', value=f'{data["footer_icon"]}')
         recreate.add_field(name='Thumbnail URL', value=f'{data["thumbnail"]}')
         recreate.add_field(name='Image URL', value=f'{data["image"]}')
+        recreate.add_field(name='Author', value=f'{author.name + "#" + author.discriminator} / {author.mention}')
         recreate.set_footer(text=f'Sniped by {ctx.author.name + "#" + ctx.author.discriminator}')
         
         await ctx.send(embed=recreate)
