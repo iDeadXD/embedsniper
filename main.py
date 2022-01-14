@@ -3,9 +3,15 @@ import discord
 from discord.ext import commands
 import asyncio
 from datetime import datetime
+import moderation
 import pytz
 
 client = commands.Bot(command_prefix='**', intents=discord.Intents.all())
+
+cogs = [moderation]
+
+for i in range(len(cogs)):
+    cogs[i].setup(client)
 
 whitelist = [836464932236165140, 851745883825373225]
 
