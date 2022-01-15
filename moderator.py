@@ -17,7 +17,7 @@ class Moderator(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        data = saved.find_one({'_id': message.guild.id})
+        data = saved.find_one({'_id': message.channel.id})
         
         if message.embeds:
             try:
@@ -43,29 +43,30 @@ class Moderator(commands.Cog):
                 thumbnail = 'None' if len(embthumbnail) == 0 else embthumbnail
                 
                 if data is None:
-                    new_data = {'_id': message.guild.id, 'authorid': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}
+                    new_data = {'_id': message.channel.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}
                     saved.insert_one(new_data)
                     await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nChannel: {message.channel.mention}')
                 else:
-                    saved.update_one({'_id': message.guild.id}, {'$set': {'author_id': message.author.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}})
+                    saved.update_one({'_id': message.channel.id}, {'$set': {'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}})
                     await dev.send(f'Embed Data has been Updated!\nTimestamp: {now}\nChannel: {message.channel.mention}')
             except Exception as e:
                 return print(e)
     
     @commands.command(aliases=['se'])
     async def snipe_embed(self, ctx):
-        data = saved.find_one({'_id': ctx.guild.id})
+        data = saved.find_one({'_id': ctx.channel.id})
         
         if data is None:
-            return
+            return await ctx.send(f'No Embed was deleted last time in {ctx.channel.mention}')
         
         author = self.client.get_user(data['author'])
         recreate = discord.Embed(
             title='--- Embed Sniped! ---',
-            description=f'**Title**: {data["title"]}',
+            description=f'Deleted Embed in {ctx.channel.mention}',
             color=discord.Color.purple(),
             timestamp=ctx.message.created_at
         )
+        recreate.add_field(name='Title', value=f'{data["title"]}')
         recreate.add_field(name='Description', value=f'{data["description"]}')
         recreate.add_field(name='Footer', value=f'{data["footer"]}')
         recreate.add_field(name='Total Fields', value=f'{data["fields"]}')
