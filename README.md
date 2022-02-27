@@ -1,4 +1,4 @@
-## EmbedSniper
+## EmbedSniper (EN)
 Embed Sniper is a Discord bot that is used to display deleted embed data.
 (My bot is offline rn. So, here the source code)
 
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## EmbedSniper
+## EmbedSniper (ID)
 EmbedSniper adalah bot Discord yang digunakan untuk menampilkan data embed yang dihapus.
 (Bot saya offline sekarang. Jadi, ini source code nya)
 
