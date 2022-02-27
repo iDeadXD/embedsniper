@@ -46,7 +46,7 @@ class Moderator(commands.Cog):
                 #Cek: Kalo baru ada embed dihapus di channel saat ini atau sebaliknya
                 if data is None:
                     new_data = {'_id': message.channel.id, 'title': f'{title}', 'description': f'{description}', 'fields': f'{fields}', 'footer': f'{footer}', 'footer_icon': f'{footer_icon}', 'image': f'{image}', 'thumbnail': f'{thumbnail}', 'author': message.author.id}
-                    saved.insert_one(new_data) #Membuat data baru dan memasukkannya ke databass
+                    saved.insert_one(new_data) #Membuat data baru dan memasukkannya ke database
                     await dev.send(f'New Embed Data has been Saved!\nTimestamp: {now}\nServer: {message.guild.name}\nChannel: {message.channel.mention}\n-----------------------') #Send message ke Dev (Optional)
                 else:
                     #Mengupdate data yang telah tersedia
