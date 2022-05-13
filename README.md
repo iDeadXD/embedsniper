@@ -19,7 +19,7 @@ python main.py
 EmbedSniper adalah bot Discord yang digunakan untuk menampilkan data embed yang dihapus.
 (Bot saya offline sekarang. Jadi, ini source code nya)
 
-## Pengaturan Umum (Cara menjalankan)
+## Cara menggunakannya
 1. Unduh dan instal [Python](https://python.org/) versi `3.6.0` atau lebih tinggi
 2. Instal semua package yang diperlukan menggunakan perintah
 ```sh
