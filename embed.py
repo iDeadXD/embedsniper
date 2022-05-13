@@ -11,7 +11,7 @@ database = dataclient['nama database'] #Sesuaikan dengan nama database yang kali
 saved = database['collection'] #Sesuaikan dengan nama collection pada saat kalian membuat database nya
 
 class EmbedSniper(commands.Cog):
-    def __init__(self, client):
+    def __init__(self, client: commands.Bot):
         self.client = client
     
     @commands.Cog.listener() #Event listener di dalam Cog
