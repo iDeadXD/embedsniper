@@ -6,6 +6,10 @@ from datetime import datetime
 import embed #Cog embed.py
 import pytz
 
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
 client = commands.Bot(command_prefix='prefix disini', intents=discord.Intents.default()) #prefix nya terserah
 
 cogs = [embed] #kalian bisa tambahin cogs yang sudah kalian buat (Harus di import terlebih dahulu)
@@ -17,6 +21,6 @@ for i in range(len(cogs)):
 async def on_ready():
     print('Bot Online')
 
-client.run('TOKEN')
+client.run(os.environ.get('TOKEN'))
 #client.run(os.getenv('TOKEN'))
 #client.run('Langsung Token')
