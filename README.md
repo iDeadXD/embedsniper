@@ -25,8 +25,8 @@ EmbedSniper adalah bot Discord yang digunakan untuk menampilkan data embed yang 
 ```sh
 pip install -r requirements.txt
 ```
-3. Atur token bot anda di `.env_example`, dan ubah nama file nya menjadi `.env`
-4. Atur URL MongoDB anda di `config.py`
+3. Atur token bot-nya di `.env_example`, dan ubah nama file nya jadi `.env`
+4. Atur URL MongoDB-nya di `config.py`
 5. Jalankan bot menggunakan perintah
 ```sh
 python main.py
